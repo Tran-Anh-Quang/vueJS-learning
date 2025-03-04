@@ -1,19 +1,12 @@
 <script setup>
-import {reactive, ref} from "vue";
-
-const textInput = ref('');
+// Giá trị của defineProps là tên sau ':' ở component cha
+const props = defineProps(['count'])
 
 </script>
 
 <template>
-  <div>
-    Text is: {{ textInput }}
-  </div>
-  <input type="text" v-model.trim="textInput">
+  <div> Count: {{ props.count }} </div>
 </template>
 
 <style scoped>
-h1 {
-  color: red
-}
 </style>

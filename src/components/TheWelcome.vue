@@ -1,19 +1,18 @@
 <script setup>
 import {reactive, ref} from "vue";
 
-const object = {
-  name: 'John Doe',
-  age: 30
-}
-
 // ref là một reactive variable
 // ref sử dụng 1 đối tượng và 1 thuộc tính
 // truy cập thuộc tính ref bằng .value
-const count1 = ref(0);
+const count1 = ref(1);
 
-count1.value = count1.value + 1;
-count1.value = count1.value + 2;
-count1.value = count1.value + 3;
+const increase = () => {
+  count1.value++;
+}
+
+const submitForm = () => {
+  count1.value++;
+}
 
 // reactive sử dụng 1 object trong có nhiều đối tượng
 const count2= reactive({
@@ -31,8 +30,24 @@ const count3 = reactive(ref([]))
 </script>
 
 <template>
-  <h1> Welcome {{ object.name }} {{ object.age }} </h1>
-  <h1>This is a count2: {{ count2.author }}</h1>
+  <h1>This is a count1: {{ count1 }}</h1>
+
+  cach 1
+  <button v-on:click="increase">
+    Increase
+  </button>
+
+  cach 2
+  <button @click="increase">
+    Increase
+  </button>
+
+<!--  thêm prevent để tránh bị reload page-->
+  <form @submit.prevent="submitForm">
+    <button type="submit">
+      Increase
+    </button>
+  </form>
 
 </template>
 

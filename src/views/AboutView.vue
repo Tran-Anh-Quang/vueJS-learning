@@ -1,6 +1,22 @@
+<script setup>
+
+import {useRoute, useRouter} from "vue-router";
+
+const router = useRouter();
+
+const route = useRoute();
+
+console.log('path', route.path);
+console.log('path', route.name);
+
+</script>
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    cach 1
+    <button @click="router.push({name: 'user'})">about user</button>
+    cach 2
+    <router-link to="/about/user">about user</router-link>
+    <router-view></router-view>
   </div>
 </template>
 

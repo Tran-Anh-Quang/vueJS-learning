@@ -1,6 +1,6 @@
 <script setup>
 import TheWelcome from '../components/TheWelcome.vue'
-import {ref} from "vue";
+import {computed, ref} from "vue";
 
 // const count = ref(10);
 //
@@ -42,6 +42,11 @@ const handleChangeProductCategory = (value) => {
   productCategory.value = value;
 }
 
+// computed trả lại 1 value và cache data
+const filteredProducts = computed(() => {
+  return products.value.filter(item => item.category === productCategory.value);
+})
+
 </script>
 
 <template>
@@ -54,11 +59,11 @@ const handleChangeProductCategory = (value) => {
     <div v-if="productCategory === 'category 1'">List product of category 1</div>
     <div v-else-if="productCategory === 'category 2'">List product of category 2</div>
 
-<!--    <div v-for="product in products">-->
-<!--      <div class="group-product-item">-->
-<!--        <div>{{ product.name }}</div>-->
-<!--        <div>{{ product.price }}</div>-->
-<!--      </div>-->
-<!--    </div>-->
+    <div v-for="product in filteredProducts">
+      <div class="group-product-item">
+        <div>{{ product.name }}</div>
+        <div>{{ product.price }}</div>
+      </div>
+    </div>
   </main>
 </template>

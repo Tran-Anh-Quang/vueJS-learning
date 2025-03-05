@@ -1,6 +1,6 @@
 <script setup>
 import TheWelcome from '../components/TheWelcome.vue'
-import {computed, onMounted, ref} from "vue";
+import {computed, onMounted, ref, watch} from "vue";
 import HelloWorld from "@/components/HelloWorld.vue";
 
 
@@ -25,15 +25,21 @@ onMounted(() => {
   console.log('mounted render');
 })
 
-const helloWorld = ref(true);
+const showHelloWorld = ref(true);
 
+// watch sẽ theo dõi ref và chạy khi ref thay đổi
+// ở đây ref chính là showHelloWorld
+watch([showHelloWorld, toDos], (newValue, oldValue) => {
+  console.log('new value', newValue);
+  console.log('old value', oldValue);
+})
 </script>
 
 <template>
   <main>
-    <div v-if="helloWorld">
+    <div v-if="showHelloWorld">
       <hello-world msg="Hello Vue 3 + Vite" />
     </div>
-    <button @click="helloWorld = false">Remove Hello World Component</button>
+    <button @click="showHelloWorld = !showHelloWorld">Remove Hello World Component</button>
   </main>
 </template>

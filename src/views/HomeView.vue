@@ -1,6 +1,6 @@
 <script setup>
 import TheWelcome from '../components/TheWelcome.vue'
-import {computed, onMounted, ref, watch} from "vue";
+import {computed, onMounted, ref, watch, watchEffect} from "vue";
 import HelloWorld from "@/components/HelloWorld.vue";
 
 
@@ -33,6 +33,13 @@ watch([showHelloWorld, toDos], (newValue, oldValue) => {
   console.log('new value', newValue);
   console.log('old value', oldValue);
 })
+
+// không truyền tham số như watch, theo dõi toàn bộ value
+watchEffect(() => {
+  console.log('showHelloWorld', showHelloWorld.value);
+  console.log('toDos', toDos.value);
+})
+
 </script>
 
 <template>

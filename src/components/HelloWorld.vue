@@ -1,9 +1,15 @@
 <script setup>
+import {onUnmounted} from "vue";
+
 defineProps({
   msg: {
     type: String,
     required: true,
   },
+})
+
+onUnmounted(() => {
+  console.log('onUnmounted');
 })
 </script>
 

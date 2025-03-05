@@ -1,6 +1,10 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import {provide, ref} from "vue";
+import HelloWorld from "@/components/HelloWorld.vue";
+
+const showHelloWorld = ref(true);
+provide('showHelloWorld', showHelloWorld);
 </script>
 
 <template>
@@ -15,8 +19,8 @@ import HelloWorld from './components/HelloWorld.vue'
       </nav>
     </div>
   </header>
-
   <RouterView />
+  <button @click="showHelloWorld = !showHelloWorld">Change Hello World</button>
 </template>
 
 <style scoped>

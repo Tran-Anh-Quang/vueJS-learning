@@ -1,5 +1,5 @@
 <script setup>
-import {onUnmounted} from "vue";
+import {inject, onUnmounted} from "vue";
 
 defineProps({
   msg: {
@@ -11,6 +11,9 @@ defineProps({
 onUnmounted(() => {
   console.log('onUnmounted');
 })
+
+const showHelloWorld = inject('showHelloWorld');
+
 </script>
 
 <template>
@@ -21,6 +24,9 @@ onUnmounted(() => {
       <a href="https://vite.dev/" target="_blank" rel="noopener">Vite</a> +
       <a href="https://vuejs.org/" target="_blank" rel="noopener">Vue 3</a>.
     </h3>
+    <div>
+      showHelloWorld {{ showHelloWorld }}
+    </div>
   </div>
 </template>
 

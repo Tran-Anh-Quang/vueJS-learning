@@ -1,6 +1,6 @@
 <script setup>
 import TheWelcome from '../components/TheWelcome.vue'
-import {computed, ref} from "vue";
+import {computed, onMounted, ref} from "vue";
 
 // const count = ref(10);
 //
@@ -47,11 +47,23 @@ const filteredProducts = computed(() => {
   return products.value.filter(item => item.category === productCategory.value);
 })
 
+const toDos = ref([]);
+
+// sau khi chạy hết từ trên xuống dưới, chạy hết template thì onMounted() chạy
+onMounted(() => {
+  fetch('https://jsonplaceholder.typicode.com/todos')
+      .then(response => response.json())
+      .then(json => toDos.value = json)
+  console.log('mounted render');
+})
+
 </script>
 
 <template>
   <main>
 <!--    <TheWelcome :count="count" @handle-increase="handleIncrease"/>-->
+
+    {{ console.log('template render')}}
 
     <button @click="handleChangeProductCategory('category 1')">Category 1</button>
     <button @click="handleChangeProductCategory('category 2')">Category 2</button>
@@ -64,6 +76,10 @@ const filteredProducts = computed(() => {
         <div>{{ product.name }}</div>
         <div>{{ product.price }}</div>
       </div>
+    </div>
+
+    <div v-for="toDo in toDos">
+      <div>{{ toDo.title }}</div>
     </div>
   </main>
 </template>
